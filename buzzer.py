@@ -12,7 +12,7 @@ GPIO.setup(buzzer_pin, GPIO.OUT)
 
 # Make buzzer sound
 GPIO.output(buzzer_pin, GPIO.HIGH)
-time.sleep(0.5)
+time.sleep(2.5)
 # Stop buzzer sound
 GPIO.output(buzzer_pin, GPIO.LOW)
 

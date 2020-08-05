@@ -16,4 +16,28 @@ time.sleep(2.5)
 # Stop buzzer sound
 GPIO.output(buzzer_pin, GPIO.LOW)
 
+# Make buzzer sound
+GPIO.output(buzzer_pin, GPIO.HIGH)
+time.sleep(0.5)
+# Stop buzzer sound
+GPIO.output(buzzer_pin, GPIO.LOW)
+
+# Make buzzer sound
+GPIO.output(buzzer_pin, GPIO.HIGH)
+time.sleep(0.1)
+# Stop buzzer sound
+GPIO.output(buzzer_pin, GPIO.LOW)
+
+# Make buzzer sound
+GPIO.output(buzzer_pin, GPIO.HIGH)
+time.sleep(0.2)
+# Stop buzzer sound
+GPIO.output(buzzer_pin, GPIO.LOW)
+
+# Make buzzer sound
+GPIO.output(buzzer_pin, GPIO.HIGH)
+time.sleep(.02)
+# Stop buzzer sound
+GPIO.output(buzzer_pin, GPIO.LOW)
+
 GPIO.cleanup()

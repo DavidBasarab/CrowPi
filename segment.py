@@ -26,7 +26,7 @@ try:
 
         # Set hours
         segment.set_digit(0, "A")  # Tens
-        segment.set_digit(1, hour % 10)  # Ones
+        segment.set_digit(1, "B")  # Ones
         # Set minutes
         segment.set_digit(2, int(minute / 10))  # Tens
         segment.set_digit(3, minute % 10)  # Ones

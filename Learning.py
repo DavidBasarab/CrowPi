@@ -8,7 +8,7 @@ ledPin = 21
 pinOn = False
 
 GPIO.setup(ledPin, GPIO.OUT)
-GPIO.output(ledPin, 0)
+GPIO.output(ledPin, GPIO.LOW)
 
 while True:
     key = input("Action, press q to quit: ")
@@ -22,11 +22,11 @@ while True:
 
         if pinOn:
             print("turning led off")
-            GPIO.output(ledPin, 0)
+            GPIO.output(ledPin, GPIO.LOW)
             pinOn = False
         else:
             print("turning led on")
-            GPIO.output(ledPin, 1)
+            GPIO.output(ledPin, GPIO.HIGH)
             pinOn = True
 
     if key == 'q':

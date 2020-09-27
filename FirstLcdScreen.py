@@ -60,6 +60,8 @@ def main():
 
     print('Initialize display')
     lcd_init()
+    time.sleep(5)
+    print("After sleep")
 
     # Loop - send text and sleep 3 seconds between texts
     # Change text to anything you wish, but must be 16 characters or less

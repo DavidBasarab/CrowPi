@@ -51,12 +51,12 @@ def main():
     GPIO.setup(LCD_D6, GPIO.OUT)
     GPIO.setup(LCD_D7, GPIO.OUT)
 
-    GPIO.output(LCD_E, GPIO.LOW)  # Set GPIO's to output mode
-    GPIO.output(LCD_RS, GPIO.LOW)
-    GPIO.output(LCD_D4, GPIO.LOW)
-    GPIO.output(LCD_D5, GPIO.LOW)
-    GPIO.output(LCD_D6, GPIO.LOW)
-    GPIO.output(LCD_D7, GPIO.LOW)
+    GPIO.output(LCD_E, False)  # Set GPIO's to output mode
+    GPIO.output(LCD_RS, False)
+    GPIO.output(LCD_D4, False)
+    GPIO.output(LCD_D5, False)
+    GPIO.output(LCD_D6, False)
+    GPIO.output(LCD_D7, False)
 
     print('Initialize display')
     lcd_init()
@@ -108,35 +108,35 @@ def lcd_write(bits, mode):
     # High bits
     GPIO.output(LCD_RS, mode)  # RS
 
-    GPIO.output(LCD_D4, GPIO.LOW)
-    GPIO.output(LCD_D5, GPIO.LOW)
-    GPIO.output(LCD_D6, GPIO.LOW)
-    GPIO.output(LCD_D7, GPIO.LOW)
+    GPIO.output(LCD_D4, False)
+    GPIO.output(LCD_D5, False)
+    GPIO.output(LCD_D6, False)
+    GPIO.output(LCD_D7, False)
     if bits & 0x10 == 0x10:
-        GPIO.output(LCD_D4, GPIO.HI)
+        GPIO.output(LCD_D4, True)
     if bits & 0x20 == 0x20:
-        GPIO.output(LCD_D5, GPIO.HI)
+        GPIO.output(LCD_D5, True)
     if bits & 0x40 == 0x40:
-        GPIO.output(LCD_D6, GPIO.HI)
+        GPIO.output(LCD_D6, True)
     if bits & 0x80 == 0x80:
-        GPIO.output(LCD_D7, GPIO.HI)
+        GPIO.output(LCD_D7, True)
 
     # Toggle 'Enable' pin
     lcd_toggle_enable()
 
     # Low bits
-    GPIO.output(LCD_D4, GPIO.LOW)
-    GPIO.output(LCD_D5, GPIO.LOW)
-    GPIO.output(LCD_D6, GPIO.LOW)
-    GPIO.output(LCD_D7, GPIO.LOW)
+    GPIO.output(LCD_D4, False)
+    GPIO.output(LCD_D5, False)
+    GPIO.output(LCD_D6, False)
+    GPIO.output(LCD_D7, False)
     if bits & 0x01 == 0x01:
-        GPIO.output(LCD_D4, GPIO.HI)
+        GPIO.output(LCD_D4, True)
     if bits & 0x02 == 0x02:
-        GPIO.output(LCD_D5, GPIO.HI)
+        GPIO.output(LCD_D5, True)
     if bits & 0x04 == 0x04:
-        GPIO.output(LCD_D6, GPIO.HI)
+        GPIO.output(LCD_D6, True)
     if bits & 0x08 == 0x08:
-        GPIO.output(LCD_D7, GPIO.HI)
+        GPIO.output(LCD_D7, True)
 
     # Toggle 'Enable' pin
     lcd_toggle_enable()
@@ -144,9 +144,9 @@ def lcd_write(bits, mode):
 
 def lcd_toggle_enable():
     time.sleep(0.0005)
-    GPIO.output(LCD_E, GPIO.HI)
+    GPIO.output(LCD_E, True)
     time.sleep(0.0005)
-    GPIO.output(LCD_E, GPIO.LOW)
+    GPIO.output(LCD_E, False)
     time.sleep(0.0005)
 
 

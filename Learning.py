@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import RPI.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
 
 ledPin = 4

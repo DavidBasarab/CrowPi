@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 

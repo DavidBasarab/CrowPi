@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import RPi.GPIO as GPIO
+import time
 
 GPIO.setmode(GPIO.BCM)
 
@@ -46,6 +47,8 @@ GPIO.output(DataPin6, GPIO.LOW)
 GPIO.output(DataPin7, GPIO.LOW)
 
 GPIO.output(Enable, GPIO.HIGH)
+
+time.sleep(5)
 
 # GPIO.setup(ledPin, GPIO.OUT)
 # GPIO.output(ledPin, GPIO.LOW)

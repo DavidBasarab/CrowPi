@@ -36,7 +36,7 @@ set_up_pin(DataPin7)
 print("Going to turn the display on")
 
 GPIO.output(RegisterSelect, GPIO.LOW)
-
+GPIO.output(Enable, GPIO.LOW)
 GPIO.output(DataPin0, GPIO.HIGH)
 GPIO.output(DataPin1, GPIO.HIGH)
 GPIO.output(DataPin2, GPIO.HIGH)
@@ -45,8 +45,6 @@ GPIO.output(DataPin4, GPIO.LOW)
 GPIO.output(DataPin5, GPIO.LOW)
 GPIO.output(DataPin6, GPIO.LOW)
 GPIO.output(DataPin7, GPIO.LOW)
-
-GPIO.output(Enable, GPIO.HIGH)
 
 time.sleep(5)
 

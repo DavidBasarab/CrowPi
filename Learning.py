@@ -14,7 +14,7 @@ GPIO.output(ledPin, GPIO.LOW)
 def print_pin_status(pin_number):
     GPIO.setup(pin_number, GPIO.IN)
     value = GPIO.input(pin_number)
-    print(f'Current Value of {pin_number} is {value}')
+    # print(f'Current Value of {pin_number} is {value}')
     GPIO.setup(pin_number, GPIO.OUT)
 
 

@@ -4,12 +4,11 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-ledPin = 4
+ledPin = 21
 pinOn = False
 
 GPIO.setup(ledPin, GPIO.OUT)
-GPIO.ouput(ledPin, 0)
-
+GPIO.output(ledPin, 0)
 
 while True:
     key = input("Action, press q to quit: ")
@@ -23,15 +22,15 @@ while True:
 
         if pinOn:
             print("turning led off")
-            GPIO.ouput(ledPin, 0)
+            GPIO.output(ledPin, 0)
             pinOn = False
         else:
             print("turning led on")
-            GPIO.ouput(ledPin, 1)
+            GPIO.output(ledPin, 1)
             pinOn = True
 
     if key == 'q':
-        print("escape key pressed exiting. . .")
+        print("Quiting. . .")
         break
 
 

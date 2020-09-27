@@ -19,7 +19,7 @@ def print_pin_status(pin_number):
 
 
 while True:
-    print_pin_status(ledPin)
+    #print_pin_status(ledPin)
 
     key = input("Action, press q to quit: ")
 

@@ -86,4 +86,4 @@ time.sleep(5)
 #         print("Quiting. . .")
 #         break
 
-
+GPIO.cleanup()

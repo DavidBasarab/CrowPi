@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-ledPin = 18
+ledPin = 4
 pinOn = False
 
 GPIO.setup(ledPin, GPIO.OUT)
@@ -19,7 +19,7 @@ def print_pin_status(pin_number):
 
 
 while True:
-    #print_pin_status(ledPin)
+    print_pin_status(ledPin)
 
     key = input("Action, press q to quit: ")
 

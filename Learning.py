@@ -20,11 +20,11 @@ while True:
     if key == '1':
 
         if pinOn:
-            print("turning led on")
+            print("turning led off")
             GPIO.ouput(ledPin, 0)
             pinOn = False
         else:
-            print("turning led off")
+            print("turning led on")
             GPIO.ouput(ledPin, 1)
             pinOn = True
 

@@ -3,18 +3,24 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
-
-RegisterSelect = 23
-Enable = 24
+LCD_RS = 23
+LCD_E = 24
 DataPin0 = 4
 DataPin1 = 17
 DataPin2 = 27
 DataPin3 = 22
-DataPin4 = 5
-DataPin5 = 6
-DataPin6 = 13
-DataPin7 = 19
+LCD_D4 = 5
+LCD_D5 = 6
+LCD_D6 = 13
+LCD_D7 = 19
+
+GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
+GPIO.setup(LCD_E, GPIO.OUT)  # Set GPIO's to output mode
+GPIO.setup(LCD_RS, GPIO.OUT)
+GPIO.setup(LCD_D4, GPIO.OUT)
+GPIO.setup(LCD_D5, GPIO.OUT)
+GPIO.setup(LCD_D6, GPIO.OUT)
+GPIO.setup(LCD_D7, GPIO.OUT)
 
 
 def set_up_pin(pin_number):
@@ -22,81 +28,84 @@ def set_up_pin(pin_number):
     GPIO.output(pin_number, GPIO.LOW)
 
 
-set_up_pin(RegisterSelect)
-set_up_pin(Enable)
-set_up_pin(DataPin0)
-set_up_pin(DataPin1)
-set_up_pin(DataPin2)
-set_up_pin(DataPin3)
-set_up_pin(DataPin4)
-set_up_pin(DataPin5)
-set_up_pin(DataPin6)
-set_up_pin(DataPin7)
+def lcd_toggle_enable():
+    time.sleep(0.0005)
+    GPIO.output(LCD_E, True)
+    time.sleep(0.0005)
+    GPIO.output(LCD_E, False)
+    time.sleep(0.0005)
 
-print("Setting to 8 bit mode")
 
-GPIO.output(DataPin0, GPIO.LOW)
-GPIO.output(DataPin1, GPIO.LOW)
-GPIO.output(DataPin2, GPIO.LOW)
-GPIO.output(DataPin3, GPIO.LOW)
-GPIO.output(DataPin4, GPIO.HIGH)
-GPIO.output(DataPin5, GPIO.HIGH)
-GPIO.output(DataPin6, GPIO.HIGH)
-GPIO.output(DataPin7, GPIO.LOW)
+def lcd_write(bits, mode):
+    # High bits
+    GPIO.output(LCD_RS, mode)  # RS
 
-GPIO.output(Enable, GPIO.HIGH)
+    GPIO.output(LCD_D4, False)
+    GPIO.output(LCD_D5, False)
+    GPIO.output(LCD_D6, False)
+    GPIO.output(LCD_D7, False)
+    if bits & 0x10 == 0x10:
+        GPIO.output(LCD_D4, True)
+    if bits & 0x20 == 0x20:
+        GPIO.output(LCD_D5, True)
+    if bits & 0x40 == 0x40:
+        GPIO.output(LCD_D6, True)
+    if bits & 0x80 == 0x80:
+        GPIO.output(LCD_D7, True)
 
-time.sleep(1)
+    # Toggle 'Enable' pin
+    lcd_toggle_enable()
 
-print("Going to turn the display on")
+    # Low bits
+    GPIO.output(LCD_D4, False)
+    GPIO.output(LCD_D5, False)
+    GPIO.output(LCD_D6, False)
+    GPIO.output(LCD_D7, False)
+    if bits & 0x01 == 0x01:
+        GPIO.output(LCD_D4, True)
+    if bits & 0x02 == 0x02:
+        GPIO.output(LCD_D5, True)
+    if bits & 0x04 == 0x04:
+        GPIO.output(LCD_D6, True)
+    if bits & 0x08 == 0x08:
+        GPIO.output(LCD_D7, True)
 
-GPIO.output(RegisterSelect, GPIO.LOW)
-GPIO.output(Enable, GPIO.LOW)
-GPIO.output(DataPin0, GPIO.HIGH)
-GPIO.output(DataPin1, GPIO.HIGH)
-GPIO.output(DataPin2, GPIO.HIGH)
-GPIO.output(DataPin3, GPIO.HIGH)
-GPIO.output(DataPin4, GPIO.LOW)
-GPIO.output(DataPin5, GPIO.LOW)
-GPIO.output(DataPin6, GPIO.LOW)
-GPIO.output(DataPin7, GPIO.LOW)
+    # Toggle 'Enable' pin
+    lcd_toggle_enable()
 
-time.sleep(5)
 
-# GPIO.setup(ledPin, GPIO.OUT)
-# GPIO.output(ledPin, GPIO.LOW)
-#
-#
-# def print_pin_status(pin_number):
-#     GPIO.setup(pin_number, GPIO.IN)
-#     value = GPIO.input(pin_number)
-#     print(f'Current Value of {pin_number} is {value}')
-#     GPIO.setup(pin_number, GPIO.OUT)
-#
-#
-# while True:
-#     print_pin_status(ledPin)
-#
-#     key = input("Action, press q to quit: ")
-#
-#     print(key)
-#
-#     if key == ' ':
-#         print("space pushed")
-#
-#     if key == '1':
-#
-#         if pinOn:
-#             print("turning led off")
-#             GPIO.output(ledPin, GPIO.LOW)
-#             pinOn = False
-#         else:
-#             print("turning led on")
-#             GPIO.output(ledPin, GPIO.HIGH)
-#             pinOn = True
-#
-#     if key == 'q':
-#         print("Quiting. . .")
-#         break
+def lcd_text(message, line):
+    # Send text to display
+    message = message.ljust(LCD_CHARS, " ")
 
-GPIO.cleanup()
+    lcd_write(line, LCD_CMD)
+
+    for i in range(LCD_CHARS):
+        lcd_write(ord(message[i]), LCD_CHR)
+
+
+def main():
+    GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
+    GPIO.setup(LCD_E, GPIO.OUT)  # Set GPIO's to output mode
+    GPIO.setup(LCD_RS, GPIO.OUT)
+    GPIO.setup(LCD_D4, GPIO.OUT)
+    GPIO.setup(LCD_D5, GPIO.OUT)
+    GPIO.setup(LCD_D6, GPIO.OUT)
+    GPIO.setup(LCD_D7, GPIO.OUT)
+
+    # Initialize display
+    lcd_init()
+
+
+# Begin program
+try:
+    main()
+
+except KeyboardInterrupt:
+    pass
+
+finally:
+    lcd_write(0x01, LCD_CMD)
+    lcd_text("So long!", LCD_LINE_1)
+    lcd_text("MBTechWorks.com", LCD_LINE_2)
+    GPIO.cleanup()

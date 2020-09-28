@@ -77,6 +77,18 @@ def lcd_write(bits, mode):
     lcd_toggle_enable()
 
 
+# Initialize and clear display
+def lcd_init():
+    print("Initialize the LCD display")
+    lcd_write(0x33, LCD_CMD)  # Initialize
+    lcd_write(0x32, LCD_CMD)  # Set to 4-bit mode
+    lcd_write(0x06, LCD_CMD)  # Cursor move direction
+    lcd_write(0x0C, LCD_CMD)  # Turn cursor off
+    lcd_write(0x28, LCD_CMD)  # 2 line display
+    lcd_write(0x01, LCD_CMD)  # Clear display
+    time.sleep(0.0005)  # Delay to allow commands to process
+
+
 def lcd_text(message, line):
     # Send text to display
     message = message.ljust(LCD_CHARS, " ")

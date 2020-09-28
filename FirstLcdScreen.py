@@ -37,7 +37,7 @@ print("Setting to 8 bit mode")
 
 GPIO.output(DataPin0, GPIO.HIGH)
 GPIO.output(DataPin1, GPIO.HIGH)
-GPIO.output(DataPin2, GPIO.LOW)
+GPIO.output(DataPin2, GPIO.HIGH)
 GPIO.output(DataPin3, GPIO.LOW)
 GPIO.output(DataPin4, GPIO.LOW)
 GPIO.output(DataPin5, GPIO.LOW)

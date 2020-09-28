@@ -33,6 +33,21 @@ set_up_pin(DataPin5)
 set_up_pin(DataPin6)
 set_up_pin(DataPin7)
 
+print("Setting to 8 bit mode")
+
+GPIO.output(DataPin0, GPIO.HIGH)
+GPIO.output(DataPin1, GPIO.HIGH)
+GPIO.output(DataPin2, GPIO.LOW)
+GPIO.output(DataPin3, GPIO.LOW)
+GPIO.output(DataPin4, GPIO.LOW)
+GPIO.output(DataPin5, GPIO.LOW)
+GPIO.output(DataPin6, GPIO.LOW)
+GPIO.output(DataPin7, GPIO.LOW)
+
+GPIO.output(Enable, GPIO.HIGH)
+
+time.sleep(1)
+
 print("Going to turn the display on")
 
 GPIO.output(RegisterSelect, GPIO.LOW)

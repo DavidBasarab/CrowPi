@@ -5,14 +5,17 @@ import time
 
 LCD_RS = 23
 LCD_E = 24
-DataPin0 = 4
-DataPin1 = 17
-DataPin2 = 27
-DataPin3 = 22
 LCD_D4 = 5
 LCD_D5 = 6
 LCD_D6 = 13
 LCD_D7 = 19
+
+# Device constants
+LCD_CHR = True  # Character mode
+LCD_CMD = False  # Command mode
+LCD_CHARS = 16  # Characters per line (16 max)
+LCD_LINE_1 = 0x80  # LCD memory location for 1st line
+LCD_LINE_2 = 0xC0  # LCD memory location 2nd line
 
 GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
 GPIO.setup(LCD_E, GPIO.OUT)  # Set GPIO's to output mode

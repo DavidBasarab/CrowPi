@@ -133,8 +133,8 @@ def main():
 
         time.sleep(3)
 
-        lcd_text("MBTechWorks.com", LCD_LINE_1)
-        lcd_text("For more R Pi", LCD_LINE_2)
+        lcd_text("I got it to work", LCD_LINE_1)
+        lcd_text("I wonder why I could not get the other way", LCD_LINE_2)
 
         time.sleep(3)
 
@@ -152,5 +152,5 @@ except KeyboardInterrupt:
 finally:
     lcd_write(0x01, LCD_CMD)
     lcd_text("So long!", LCD_LINE_1)
-    lcd_text("MBTechWorks.com", LCD_LINE_2)
+    lcd_text("WHOO WHOO", LCD_LINE_2)
     GPIO.cleanup()
